@@ -23,15 +23,11 @@ public class Application implements CommandLineRunner {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
-
     @Override
     public void run(String... params) throws Exception {
         User admin = new User();
         admin.setUsername("admin");
+        admin.setRealName("管理员");
         admin.setPassword("admin");
         admin.setEmail("admin@email.com");
         admin.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_ADMIN)));
@@ -41,6 +37,7 @@ public class Application implements CommandLineRunner {
         User client = new User();
         client.setUsername("client");
         client.setPassword("client");
+        client.setRealName("普通用户");
         client.setEmail("client@email.com");
         client.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
 

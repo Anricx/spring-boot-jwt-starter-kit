@@ -1,10 +1,9 @@
 package com.github.anricx.api.controller;
 
-import com.github.anricx.api.model.AccessToken;
-import com.github.anricx.api.response.UserLoginResponse;
-import com.github.anricx.api.response.UserLogoutResponse;
+import com.github.anricx.persistent.entity.User;
+import com.github.anricx.security.AccessToken;
+import com.github.anricx.api.response.UserAuthenticateResponse;
 import com.github.anricx.api.response.UserProfileResponse;
-import com.github.anricx.api.response.UserRefreshResponse;
 import com.github.anricx.security.SecurityConstants;
 import com.github.anricx.service.UserService;
 import io.swagger.annotations.*;
@@ -16,7 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Api(tags = "Use APIs", value = "User Login/Register APIs")
+/**
+ * User APIs
+ * Created by dengt on 2019/8/31
+ */
+@Api(tags = "Use APIs", value = "User Authenticate/Profile APIs")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -27,36 +30,47 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @ApiOperation(value = "Authenticates User and returns its Access Token.")
+    @ApiOperation(value = "Get user simple profile by username")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Username is not found!"),
+    })
+    @GetMapping("/profile")
+    public UserProfileResponse profile(@ApiParam(value = "Username", required = true) @RequestParam String username) {
+        User user = userService.profile(username);
+
+        return modelMapper.map(user, UserProfileResponse.class);
+    }
+
+    @ApiOperation(value = "Authenticates user and returns it's AccessToken.")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 422, message = "Invalid username/password supplied")
     })
-    @PostMapping("/login")
-    public UserLoginResponse login(@ApiParam(value = "Username", required = true) @RequestParam String username,
-                                   @ApiParam(value = "Password", required = true) @RequestParam String password,
-                                   HttpServletResponse httpServletResponse) {
+    @PostMapping("/authenticate")
+    public UserAuthenticateResponse authenticate(@ApiParam(value = "Username", required = true) @RequestParam String username,
+                                                 @ApiParam(value = "Password", required = true) @RequestParam String password,
+                                                 HttpServletResponse httpServletResponse) {
         AccessToken accessToken = userService.signin(username, password);
 
         // Inject Header...
         httpServletResponse.addHeader(SecurityConstants.TOKEN_HEADER, accessToken.toString());
 
-        return UserLoginResponse.builder()
+        return UserAuthenticateResponse.builder()
                 .tokenType(accessToken.getType())
                 .accessToken(accessToken.getValue())
                 .build();
     }
 
-    @ApiOperation(value = "refresh current access token", authorizations = {@Authorization(value= SecurityConstants.BearerAPIKey)})
+    @ApiOperation(value = "Refresh current AccessToken", authorizations = {@Authorization(value= SecurityConstants.BearerAPIKey)})
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
     @GetMapping("/token")
-    public UserRefreshResponse refresh(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public UserAuthenticateResponse token(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         AccessToken accessToken = userService.refresh(httpServletRequest.getRemoteUser());
 
         // Inject Header...
         httpServletResponse.addHeader(SecurityConstants.TOKEN_HEADER, accessToken.toString());
 
-        return UserRefreshResponse.builder()
+        return UserAuthenticateResponse.builder()
                 .tokenType(accessToken.getType())
                 .accessToken(accessToken.getValue())
                 .build();
@@ -69,18 +83,18 @@ public class UserController {
             @ApiResponse(code = 403, message = "Access denied"),
             @ApiResponse(code = 500, message = "Expired or invalid JWT token")
     })
-    @GetMapping(value = "/profile")
-    public UserProfileResponse profile(HttpServletRequest httpServletRequest) {
+    @GetMapping(value = "/whoami")
+    public UserProfileResponse whoami(HttpServletRequest httpServletRequest) {
         return modelMapper.map(userService.whoami(httpServletRequest), UserProfileResponse.class);
     }
 
-    @ApiOperation(value = "Logout current Session", authorizations = {@Authorization(value= SecurityConstants.BearerAPIKey)})
-    @DeleteMapping(value = "/token")
-    public UserLogoutResponse logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        httpServletResponse.setHeader(SecurityConstants.TOKEN_HEADER, "");
-        return UserLogoutResponse.builder()
-                .build();
-    }
+//    @ApiOperation(value = "Logout current Session", authorizations = {@Authorization(value= SecurityConstants.BearerAPIKey)})
+//    @DeleteMapping(value = "/token")
+//    public UserLogoutResponse logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//        httpServletResponse.setHeader(SecurityConstants.TOKEN_HEADER, "");
+//        return UserLogoutResponse.builder()
+//                .build();
+//    }
 
 //    @ApiOperation(value = "Creates user and returns its JWT token")
 //    @ApiResponses(value = {

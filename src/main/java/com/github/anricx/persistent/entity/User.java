@@ -9,21 +9,24 @@ import java.util.List;
 
 @Setter
 @Getter
-@Entity
+@Entity(name = "_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Size(min = 4, max = 255, message = "Minimum username length: 4 characters")
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
+    private String realName;
+
+    @Column(nullable = false)
     private String email;
 
-    @Size(min = 8, message = "Minimum password length: 8 characters")
+    @Column(nullable = false)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)

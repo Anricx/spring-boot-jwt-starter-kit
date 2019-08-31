@@ -2,6 +2,16 @@ spring:
   devtools:
     livereload:
       enabled: true
+    restart:
+      enabled: true # Enable automatic restart
+      poll-interval: 1000 # Amount of time (in milliseconds) to wait between polling for classpath changes.
+      quiet-period: 400 # Amount of quiet time (in milliseconds) required without any classpath changes before a restart is triggered.
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: sa
@@ -15,12 +25,6 @@ spring:
         format_sql: true
         id:
           new_generator_mappings: false
-
-spring.devtools.livereload.enabled: true # Enable a livereload.com compatible server.
-spring.devtools.livereload.port: 35729 # Server port.
-spring.devtools.restart.enabled: true # Enable automatic restart.
-spring.devtools.restart.poll-interval: 1000 # Amount of time (in milliseconds) to wait between polling for classpath changes.
-spring.devtools.restart.quiet-period: 400 # Amount of quiet time (in milliseconds) required without any classpath changes before a restart is triggered.
 
 server:
   port: 8080 # This is the default port anyway, but you can change it here

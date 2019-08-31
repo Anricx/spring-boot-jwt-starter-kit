@@ -57,8 +57,8 @@ public class SwaggerConfig {
     @Getter
     private class Metadata {
 
-        private String title = "D.T.'s Private REST API";
-        private String description = "This is a JWT authentication service. You can find out more about JWT at [https://jwt.io/](https://jwt.io/). For this sample, you can use the `admin` or `client` users (password: admin and client respectively) to test the authorization filters. Once you have successfully logged in and obtained the token, you should click on the right top button `Authorize` and introduce it with the prefix \"Bearer \".";
+        private String title = "JWT REST API";
+        private String description = "This is a JWT authentication service. You can find out more about JWT at [https://jwt.io/](https://jwt.io/).";
         private String version = "1.0.0";
         private String license;
         private String licenseUrl;

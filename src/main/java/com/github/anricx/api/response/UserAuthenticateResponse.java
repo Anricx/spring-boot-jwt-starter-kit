@@ -13,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UserRefreshResponse {
+public class UserAuthenticateResponse {
 
     private String tokenType;
     private String accessToken;

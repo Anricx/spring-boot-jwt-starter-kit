@@ -1,4 +1,4 @@
-package com.github.anricx.api.model;
+package com.github.anricx.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
