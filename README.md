@@ -4,19 +4,10 @@
 
 # Stack
 
-![](https://img.shields.io/badge/java_8-✓-green.svg)
-![](https://img.shields.io/badge/spring_boot-✓-green.svg)
-![](https://img.shields.io/badge/mysql-✓-green.svg)
-![](https://img.shields.io/badge/jwt-✓-green.svg)
-![](https://img.shields.io/badge/swagger_3-✓-green.svg)
-
-You can find a related post for this repository [here](https://medium.com/@xoor/jwt-authentication-service-44658409e12c).
-
-***
-
-<h3 align="center">Please help this repo with a :star: if you find it useful! :blush:</h3>
-
-***
+![](https://img.shields.io/badge/java_8-✓-blue.svg)
+![](https://img.shields.io/badge/spring_boot-✓-blue.svg)
+![](https://img.shields.io/badge/jwt-✓-blue.svg)
+![](https://img.shields.io/badge/swagger_3-✓-blue.svg)
 
 # File structure
 
