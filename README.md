@@ -4,11 +4,11 @@
 
 # Stack
 
-![](https://img.shields.io/badge/java_8-✓-blue.svg)
-![](https://img.shields.io/badge/spring_boot-✓-blue.svg)
-![](https://img.shields.io/badge/mysql-✓-blue.svg)
-![](https://img.shields.io/badge/jwt-✓-blue.svg)
-![](https://img.shields.io/badge/swagger_2-✓-blue.svg)
+![](https://img.shields.io/badge/java_8-✓-green.svg)
+![](https://img.shields.io/badge/spring_boot-✓-green.svg)
+![](https://img.shields.io/badge/mysql-✓-green.svg)
+![](https://img.shields.io/badge/jwt-✓-green.svg)
+![](https://img.shields.io/badge/swagger_3-✓-green.svg)
 
 You can find a related post for this repository [here](https://medium.com/@xoor/jwt-authentication-service-44658409e12c).
 
@@ -324,7 +324,7 @@ http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 2. Fork this repository and clone it
   
   ```
-  $ git clone https://github.com/<your-user>/spring-boot-jwt
+  $ git clone https://github.com/<your-user>/spring-boot-jwt-starter-kit
   ```
   
 3. Navigate into the folder  
@@ -388,10 +388,3 @@ http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 - Report issues
 - Open pull request with improvements
 - Spread the word
-- Reach out to me directly at <mauriurraco@gmail.com>
-
-# Donate
-
-`btc: 36V7HqqENSKn6iFCBuE4iCdtB29uGoCKzN`
-
-`eth: 0xB419E3E9fa2233383E0877d442e55C34B9C944dD`
