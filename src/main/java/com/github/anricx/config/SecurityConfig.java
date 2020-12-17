@@ -2,7 +2,6 @@ package com.github.anricx.config;
 
 import com.github.anricx.security.JwtTokenFilterConfigurer;
 import com.github.anricx.security.JwtTokenProvider;
-import com.github.anricx.security.crypto.PBPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -25,11 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * Allow swagger to be accessed without authentication
      */
     private static final String[] AUTH_WHITELIST = {
-            "/v2/api-docs",
-            "/swagger-resources/**",
+            "/v3/api-docs",
+            "/v3/api-docs/*",
             "/swagger-ui.html",
-            "/v2/api-docs",
-            "/webjars/**",
+            "/swagger-ui/*",
             "/public"
     };
 
@@ -79,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new PBPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
 }

@@ -6,7 +6,6 @@ import com.github.anricx.persistent.repository.UserRepository;
 import com.github.anricx.security.AccessToken;
 import com.github.anricx.security.JwtTokenProvider;
 import com.github.anricx.security.SecurityConstants;
-import com.github.anricx.security.crypto.PBPassWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,7 +35,7 @@ public class UserService implements UserDetailsService {
 
     public AccessToken signin(String username, String password) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, PBPassWrapper.wrap(password, username)));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
             String token = jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
             return AccessToken.builder()
@@ -50,7 +49,7 @@ public class UserService implements UserDetailsService {
 
     public String signup(User user) {
         if (!userRepository.existsByUsername(user.getUsername())) {
-            user.setPassword(passwordEncoder.encode(PBPassWrapper.wrap(user.getPassword(), user.getUsername())));
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
         } else {

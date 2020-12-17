@@ -21,51 +21,45 @@ You can find a related post for this repository [here](https://medium.com/@xoor/
 # File structure
 
 ```
-spring-boot-jwt/
- │
- ├── src/main/java/
- │   └── murraco
- │       ├── configuration
- │       │   └── SwaggerConfig.java
- │       │
- │       ├── controller
- │       │   └── UserController.java
- │       │
- │       ├── dto
- │       │   ├── UserDataDTO.java
- │       │   └── UserResponseDTO.java
- │       │
- │       ├── exception
- │       │   ├── CustomException.java
- │       │   └── GlobalExceptionController.java
- │       │
- │       ├── model
- │       │   ├── Role.java
- │       │   └── User.java
- │       │
- │       ├── repository
- │       │   └── UserRepository.java
- │       │
- │       ├── security
- │       │   ├── JwtTokenFilter.java
- │       │   ├── JwtTokenFilterConfigurer.java
- │       │   ├── JwtTokenProvider.java
- │       │   ├── MyUserDetails.java
- │       │   └── WebSecurityConfig.java
- │       │
- │       ├── service
- │       │   └── UserService.java
- │       │
- │       └── JwtAuthServiceApp.java
- │
- ├── src/main/resources/
- │   └── application.yml
- │
- ├── .gitignore
- ├── LICENSE
- ├── mvnw/mvnw.cmd
- ├── README.md
- └── pom.xml
+spring-boot-jwt-starter-kit
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── github
+    │   │           └── anricx
+    │   │               ├── Application.java
+    │   │               ├── api
+    │   │               │   ├── entity
+    │   │               │   ├── request
+    │   │               │   └── response
+    │   │               │       ├── UserAuthenticateResponse.java
+    │   │               │       └── UserProfileResponse.java
+    │   │               ├── config
+    │   │               │   ├── SecurityConfig.java
+    │   │               │   └── SpringConfig.java
+    │   │               ├── controller
+    │   │               │   └── UserController.java
+    │   │               ├── exception
+    │   │               │   ├── CustomException.java
+    │   │               │   └── GlobalExceptionHandlerController.java
+    │   │               ├── persistent
+    │   │               │   ├── entity
+    │   │               │   │   ├── Role.java
+    │   │               │   │   └── User.java
+    │   │               │   └── repository
+    │   │               │       └── UserRepository.java
+    │   │               ├── security
+    │   │               │   ├── AccessToken.java
+    │   │               │   ├── JwtTokenFilter.java
+    │   │               │   ├── JwtTokenFilterConfigurer.java
+    │   │               │   ├── JwtTokenProvider.java
+    │   │               │   └── SecurityConstants.java
+    │   │               └── service
+    │   │                   └── UserService.java
+    │   └── resources
+    │       └── application.yml
 ```
 
 # Introduction (https://jwt.io)

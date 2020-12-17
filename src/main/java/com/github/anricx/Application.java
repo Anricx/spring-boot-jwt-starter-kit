@@ -3,7 +3,6 @@ package com.github.anricx;
 import com.github.anricx.persistent.entity.Role;
 import com.github.anricx.persistent.entity.User;
 import com.github.anricx.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
